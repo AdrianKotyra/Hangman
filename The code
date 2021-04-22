@@ -1,0 +1,317 @@
+
+
+
+
+
+
+def main():
+    
+    def import_list_only():
+        file = open("imionaa.txt")
+        for line in file.readlines():
+            line.strip()
+            list_of_words.append(line)
+        file.close()
+
+    
+    import random
+    import sys
+
+    number_of_tries = 5
+    user_letters = []
+    indeksy_literowe = []
+    list_of_words = []
+
+    import_list_only() 
+    user_words = [] 
+    word = (random.choice(list_of_words))
+    x = word.strip()
+    print(x) 
+    
+    
+    for element in x:
+        user_words.append("_")
+        
+
+
+    def index_podanych_litter_w_slowie(x, letter):
+        indexes = []
+        for index, letter_in_word in enumerate(x):
+            if letter == letter_in_word:
+                indexes.append(index)
+        return indexes
+
+
+    def export_names():
+        file = open("imionaa.txt", "w")
+        for every_word in list_of_words:
+            file.write(every_word)
+        file.close()
+            
+        
+        
+
+    
+
+    def clear_list():
+        while True:
+            list_of_words.sort()
+            list_of_words_index = 0
+            for every_word in list_of_words:
+                print(every_word.strip() + "["+ str(list_of_words_index) +"]")
+                list_of_words_index +=1  
+                
+            try:
+                every_word_index = int(input("Wpisz numer nazwy do usuniecia: "))
+                list_of_words.pop(every_word_index)
+                print("Slowo zostalo usuniete")
+                export_names()
+                
+                               
+            except ValueError:
+                print("Podaj liczbe")
+                continue   
+                   
+            except IndexError: 
+                print("Nie ma takiego indeksu")
+                continue 
+            while True:
+                wyjscie = input("wcisnij [m]zeby wyjsc do menu, [c] zeby kontynuowac usuwanie ")
+                if wyjscie == "m" or wyjscie =="M":
+                    return      
+                if wyjscie == "c" or wyjscie =="C":
+                    break 
+                else:
+                    print("Podaj litere [m] lub [c]")   
+
+   
+    while True:
+    
+        print("-------------------------------------")
+        print("1. Zacznij gre")
+        print("2. Pokaz liste imion do zgadniecia")
+        print("3. Dodaj imie do listy i zapisz")
+        print("4. Wyczysc slowo z listy")
+        print("5. Wylacz gre ")
+        print("--------------------------------------")
+
+        try:
+        
+            wybor = int(input("Wybierz czynnosc: ")) 
+            list_of_words.sort() 
+
+        except ValueError:
+            print("Podaj wlasciwy numer")  
+            continue
+
+        if wybor ==2:
+            print([every_word.strip('\n') for every_word in list_of_words]) 
+            
+                
+        if wybor ==3:
+            imie = input("Dodaj imie do listy : ")
+            list_of_words.append(imie +"\n")
+            export_names()
+            print("Nazwa zostala dodana! ")
+            
+        if wybor == 4:  
+            clear_list()  
+
+        if wybor ==5:
+            print("Koniec gry")
+            sys.exit()   
+        if wybor >= 6:
+            print("Podaj numer od 1 do 5")   
+        if wybor == 1:
+            print("Zaczynamy gre ")
+          
+ 
+            while True:
+
+                letter = input("Zgadnij litere slowa: ")
+                print("----------------------------------")
+                user_letters.append(letter)
+                found_indexes = (index_podanych_litter_w_slowie(x, letter))
+
+
+                if letter.isalnum()==False:
+                    print("Podaj litere")
+                    number_of_tries -=0
+                    user_letters.remove(letter)
+                elif letter.isdigit()==True:
+                    print("Podaj litere, nie cyfre")
+                    number_of_tries -=0
+                    user_letters.remove(letter)
+                elif len(letter) >=2:
+                    print("Podaj jedna litere")
+                    number_of_tries -=0
+                    user_letters.remove(letter)
+
+                elif user_letters.count(letter) >=2:
+                    print("Dodales ta same litere")
+                    number_of_tries -=0
+                    user_letters.remove(letter)
+                    print("Uzyte litery", user_letters)
+                    print("Pozostalo prob", number_of_tries)
+
+                
+                elif len(found_indexes) == 0:
+                    number_of_tries -= 1
+                    print("Nie ma takiej litery")
+                    print("----------------------------------")
+                    print("Uzyte litery", user_letters)
+                    print("Pozostalo prob", number_of_tries)
+                    
+
+                
+                    if number_of_tries ==0:
+                        print("Slowo to" + " " + "-" +" " + x)
+                        print("koniec")  
+                        while True:
+                            odpowiedz = input("Czy chcesz zagrac ponownie?, wpisz [tak], zeby kontynuowac, [nie] zeby zakonczyc: ")  
+                            if odpowiedz == "tak":   
+                                main()
+                            if odpowiedz.isalnum() ==False:
+                                print("Podaj slowo [tak] lub [nie]")    
+                            elif odpowiedz.isdigit() == True:
+                                print("Podaj [tak] lub [nie]") 
+                            elif odpowiedz == "nie":
+                                print("koniec gry")
+                                sys.exit()    
+                else:
+                    print("Trafiono!")    
+                    for index in found_indexes:
+                        user_words[index] = letter
+                    print("".join(user_words))
+                    if ("".join(user_words)) == x:
+                        print("Slowo to:", x)
+                        print("Gratulacje !") 
+
+                        while True:
+                            odpowiedz = input("Czy chcesz zagrac ponownie?, wpisz [tak], zeby kontynuowac, [nie] zeby zakonczyc: ")  
+        
+                            if odpowiedz.isalnum() ==False:
+                                print("Podaj [tak] lub [nie]")    
+                            elif odpowiedz.isdigit() == True:
+                                print("Wpisz [tak] , badz [nie], zamiast liczby") 
+                            elif len(odpowiedz) >=4:
+                                print("Podaj [tak] lub [nie] dadsa")    
+                            elif odpowiedz == "tak":   
+                                main()    
+                            elif odpowiedz == "nie":
+                                print("koniec gry")
+                                exit()     
+                            
+                                
+main()
+                        
+
+
+
+
+                
+                    
+
+                
+
+                    
+
+                        
+                    
+                    
+                
+                    
+                            
+
+                                
+                        
+
+                    
+                            
+                    
+
+
+
+                    
+                        
+                        
+
+                        
+
+
+                        
+
+                
+                    
+                
+
+                    
+
+
+
+
+
+
+
+                    
+
+                    
+                    
+
+                    
+                    
+
+
+
+                
+                    
+                
+                    
+                
+
+                
+
+
+                
+
+
+
+
+                
+
+
+
+
+
+
+
+
+                    
+                
+
+                    
+
+                    
+                    
+
+
+
+            
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
