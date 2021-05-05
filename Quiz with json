@@ -1,0 +1,199 @@
+def main():  
+    
+        
+
+    
+    global points  
+    import json
+    import random
+    import sys
+    
+
+    
+    list_of_scores = []
+    list_of_scores_names = []
+
+    file = open("Score_quiz", "r")
+    for line in file.readlines():
+        list_of_scores.append(line)
+        file.close()
+    
+    file = open("Score_quiz_names", "r")
+    for line in file.readlines():
+        list_of_scores_names.append(line)
+        file.close()  
+        
+       
+    def print_info():
+        print("(Question for 3 points if incorrect answer losing -3 points)")
+
+    
+    def exit_options():
+        
+        while True:
+            
+            new_game = input("Do you want to try again, if yes type [Y] if no [N]?")
+            if new_game == "Y" or new_game =="y":
+                main()
+            elif new_game == "N" or new_game =="n":
+                print("Have a nice day! ")
+                sys.exit() 
+
+            elif new_game != "y" or new_game != "Y" or new_game != "x" or new_game != "y" or  new_game != "Y" or new_game != "x" or new_game != "X":
+                print("Type [Y], [X], [N] ")
+                continue          
+
+
+
+    def show_questions(question):  
+        
+        while True:
+         
+            global points
+            print("---------------------------------------------------------------------------------")
+            print(question["question"])
+            if (question["question"]) == "When did Germany surrender to the Allies, ending World War Two in Europe?": 
+                print_info()  
+            if (question["question"]) == "Where did German army lose its first battle of the war in Europe, in early 1943?":
+                print_info()
+            if (question["question"]) == "Who was the first Chancellor of the Federal Republic of Germany (West Germany)?":
+                print_info()
+            if (question["question"]) == "What is Voldemort's final horcrux?":
+                print_info()
+            if (question["question"]) == "Who takes over as headmaster of Hogwarts after Dumbledore's death?":
+                print_info()   
+            print()
+            print("a:", question["a"])
+            print("b:", question["b"])
+            print("c:", question["c"])
+            print()
+            print(question["correct"])
+            
+            
+            
+            odpowiedz = input("Answer the following questions, choose [a, b or c] or skip the question typing [n] for not losing the points: ")
+            if (question["question"]) == "Who takes over as headmaster of Hogwarts after Dumbledore's death?" or (question["question"]) == "What is Voldemort's final horcrux?" or (question["question"]) == "Who was the first Chancellor of the Federal Republic of Germany (West Germany)?" or (question["question"]) == "Where did German army lose its first battle of the war in Europe, in early 1943?" or (question["question"]) == "When did Germany surrender to the Allies, ending World War Two in Europe?": 
+                if odpowiedz == (question["correct"]):
+                    if odpowiedz != "n":
+                        if odpowiedz == "a" or odpowiedz == "b" or odpowiedz == "c" or odpowiedz == "d":
+                            points +=3
+                            print("Your score is: ", points) 
+                            break
+                    
+            if (question["question"]) == "Who takes over as headmaster of Hogwarts after Dumbledore's death?" or (question["question"]) == "What is Voldemort's final horcrux?" or (question["question"]) == "Who was the first Chancellor of the Federal Republic of Germany (West Germany)?" or (question["question"]) == "Where did German army lose its first battle of the war in Europe, in early 1943?" or (question["question"]) == "When did Germany surrender to the Allies, ending World War Two in Europe?":  
+                if odpowiedz != (question["correct"]):
+                    if odpowiedz != "n":
+                            if odpowiedz == "a" or odpowiedz == "b" or odpowiedz == "c" or odpowiedz == "d": 
+                                print("It is incorrect answer !")
+                                points -=3
+                                print("Your score is: ", points) 
+                                break   
+                        
+                
+            if (question["question"]) != "Who takes over as headmaster of Hogwarts after Dumbledore's death?" or (question["question"]) != "What is Voldemort's final horcrux?" or (question["question"]) != "Who was the first Chancellor of the Federal Republic of Germany (West Germany)?" or (question["question"]) != "Where did German army lose its first battle of the war in Europe, in early 1943?" or (question["question"]) != "When did Germany surrender to the Allies, ending World War Two in Europe?":
+                if odpowiedz == (question["correct"]) : 
+                    if odpowiedz != "n":
+                        if odpowiedz == "a" or odpowiedz == "b" or odpowiedz == "c" or odpowiedz == "d":
+                            print("It is correct answer !")
+                            points +=1
+                            print("Your score is: ", points)
+                            break
+                        
+                
+
+            if (question["question"]) != "Who takes over as headmaster of Hogwarts after Dumbledore's death?" or (question["question"]) != "What is Voldemort's final horcrux?" or (question["question"]) != "Who was the first Chancellor of the Federal Republic of Germany (West Germany)?" or (question["question"]) != "Where did German army lose its first battle of the war in Europe, in early 1943?" or (question["question"]) != "When did Germany surrender to the Allies, ending World War Two in Europe?":
+                if odpowiedz != (question["correct"]):
+                    if odpowiedz != "n":
+                        if odpowiedz == "a" or odpowiedz == "b" or odpowiedz == "c" or odpowiedz == "d": 
+                            print("It is incorrect answer !")
+                            points -=1
+                            print("Your score is: ", points)
+                            break
+
+            if odpowiedz == "n":
+                print("Next question ")
+                print("Your score is: ", points)
+                break   
+            
+            
+            if odpowiedz != "a" or odpowiedz != "b" or odpowiedz != "c" or odpowiedz != "d" or odpowiedz != "n" or odpowiedz != "N" or odpowiedz != (question["correct"]):
+                print("Put the correct letter [a], [b],[c]")
+                continue          
+                    
+             
+    with open("tst.json") as x:
+        questions = json.load(x)
+        x = questions
+        random.shuffle(x)
+        
+        
+        print("---------------------------------------------------")
+        print("Lista wynikow: " + "".join(list_of_scores))
+        print("---------------------------------------------------")
+        points = 0
+        print()
+        print("New Quiz has started") 
+        print("=======================================================================")
+        for I in range(0, len(x)):
+        
+            show_questions(questions[I])
+             
+        
+        while True:
+            
+            score.append(str(points)) 
+            new_game = input("Do you want to try again, if yes type [Y] if no [N]?, if you want to save your score type [X] ")
+            if new_game == "Y" or new_game =="y":
+                main()
+            elif new_game == "N" or new_game =="n":
+                print("Have a nice day! ")
+                points = len(points) - len(points)
+                sys.exit() 
+            elif new_game == "x" or new_game =="X":
+                while True:
+                   
+                    file = open("Score_quiz", "w+")
+                    
+                    
+                    name_of_player = input("Add your name to your score ")
+                    if (name_of_player + "\n") in list_of_scores_names:
+                        print("taka nazwa just istnieje, zmien nazwe")
+                        continue
+                    else:
+                        
+
+                        list_of_scores.append(name_of_player + "("+ str(points) + ")" + "," + " ")
+                        list_of_scores_names.append(name_of_player + "\n")
+                        list_of_scores_names
+                        for _ in list_of_scores:
+                            file.write(_)
+        
+                        file = open("Score_quiz_names", "w",)
+                        for y in list_of_scores_names:
+                            file.write(y)
+                        file.close()
+                        
+                            
+
+                        exit_options()
+                
+                
+            elif new_game != "y" or new_game != "Y" or new_game != "x" or new_game != "y" or  new_game != "Y" or new_game != "x" or new_game != "X":
+                print("Type [Y], [X], [N] ")
+                continue             
+
+
+points = 0
+main()
+
+
+
+
+
+
+        
+        
+        
+
+
+
