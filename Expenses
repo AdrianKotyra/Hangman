@@ -1,0 +1,224 @@
+import time
+from datetime import datetime
+
+newtime = time.time() + 60
+print(time.ctime(newtime))
+xy = str(newtime)
+
+
+import json
+from os import remove
+expenses = []
+
+
+while True:
+    try:
+        with open('Statistics.txt', 'r') as f:
+            expenses = json.loads(f.read())
+            break
+    except FileNotFoundError:
+        break
+    
+def add_expenses(choice):
+    expense_amount = int(input("Add amount in [zl]: ")) 
+    expense_category = input("Add type of input amount f.e House, food, shopping etc.:")
+    expense = (expense_amount, expense_category, choice)
+    
+    expenses.append(expense)
+    expense_index = 1
+    for expense in expenses:
+        print("["+ str(expense_index)+"]"+ "-", expense)
+        expense_index +=1
+    print("[Expenses have been added]")
+    print()
+    if expense_amount == str:
+        print("Type digits")
+      
+
+def choice_deleting():
+
+    while True:
+        x = input("Are you sure you want to clear all your expenses? [Y], [N]")
+        if x == "Y" or x =="y":
+            expenses.clear()
+            print("all expenses have been cleared")
+            break
+        if x == "N" or x =="n":
+            break
+        if x != "y" or x != "Y" or x != "N" or x != "n":
+            continue  
+
+
+def export_statistic():
+    with open('Statistics.txt', 'w') as f:
+        f.write(json.dumps(expenses))        
+    
+        
+def statistics(choice):
+    Months()
+    
+    print("Expenses this month - ")
+    expenses_index =0
+    for expense_amount, expense_category, expense_choice in expenses:
+        if expense_choice == choice:
+            expenses_index +=1
+        print("[" +str(expenses_index)+"]", expense_amount,"zl", "("+ expense_category+")")            
+
+        
+
+
+    print("Sum of expenses this month - ")
+    sum_this_month = sum(expense_amount for expense_amount, expense_category, expense_choice in expenses if expense_choice == choice) 
+    print(sum_this_month)
+    print("Average expenses - ")
+    average_expenses = sum_this_month / len(expenses)
+    print(average_expenses)
+    print("Total expenses of all months - ")
+    total = sum(expense_amount for expense_amount, expense_category, expense_choice in expenses)
+    print(total)
+    print("Average expenses of all months - ")
+    average_expenses_all = total / len(expenses)
+    print(average_expenses_all)
+    return expense_amount, expense_category, expense_choice, expenses_index
+    
+    
+def Months():
+    if _ ==1:
+        print("January")  
+    if _ ==2:
+        print("February")
+    if _ ==3:
+        print("March")
+    if _ ==4:
+        print("April")
+    if _ ==5:
+        print("May")
+    if _ ==6:
+        print("June")
+    if _ ==7:
+        print("July")
+    if _ ==8:
+        print("August")
+    if _ ==9:
+        print("September")
+    if _ ==10:
+        print("October")
+    if _ ==11:
+        print("November")
+    if _ ==12:
+        print("December")      
+    
+
+while True:
+    try:
+        print()
+        choice = int(input("Choose a month of your expenses by typing [1-12] or [0] to exit: "))
+        print()
+        if choice == 0:
+            print("Application closed")
+            break
+        
+                
+        numbers = range(0,13)
+        for _ in numbers:
+            if choice == _:
+                while True:
+                    try:
+                        
+                        Months()
+                        print()
+                        print("[0].Back to choosing a month")
+                        print("[1].Add expenses to this month")
+                        print("[2].Show statistics")
+                        print("[3].Save expenses")
+                        print("[4].clear all expenses")
+                        print("[5].clear monthly expenses")
+                        print()
+                        task = int(input("Type [0], [1], [2], [3], [4] to execute a task: "))
+                        
+                        print()
+                        if task == 0:
+                            break
+                        if task ==1:
+                            add_expenses(choice)
+                            continue
+                              
+                        if task ==2:
+                            statistics(choice)
+                            print() 
+                        if task ==3:
+                            export_statistic()
+                            print("expenses have been updated") 
+                        if task ==4:
+                            choice_deleting()
+                        if task ==5:
+                            while True:
+                                try:
+                                    expense_index = 1
+                                    for expense in expenses:
+                                        print("["+ str(expense_index)+"]"+ "-", expense)
+                                        expense_index +=1
+                                    print()
+                                    y = int(input("Choose expenses to remove by typing a number in or type [Y] to exit: ")) 
+                                    del expenses [choice -1] 
+                                    print("expenses have been removed") 
+                                    break
+                                except IndexError:
+                                    break
+                                    
+                               
+                    except ZeroDivisionError:
+                        print("[You have no added expenses]")  
+                        print() 
+                        continue
+                    except ValueError:
+                        print("Type digits, try again")
+                        continue
+                            
+                            
+    except ValueError:
+        print("Choose a month of your expenses by typing [1-12] or [0] to exit: ") 
+        print("Type digits, try again") 
+        if y == "Y" or y =="Y":
+            break 
+            
+                                    
+        
+        
+
+                
+                    
+                        
+
+                        
+
+
+
+
+
+
+
+
+
+
+                    
+                    
+
+
+                        
+
+                        
+                            
+
+
+                
+
+
+
+                
+
+
+
+
+
+
