@@ -1,0 +1,112 @@
+
+
+import sys
+tasks = []
+
+        
+def main():
+    while True:
+        try:
+            print()
+            print("1.Show tasks")
+            print("2.Add tasks")
+            print("3.Remove task")
+            print("4.Save tasks")
+            print("5.Exit")
+            print()
+            choice = int(input("Choose tasks to run from 1 to 4 or 5 to exit: "))
+            if choice ==1:
+                print("List of all tasks: ")
+                if tasks == []:
+                    print("The list is empty")
+                else:
+                    task_index =0
+                    for task in tasks:
+                        task_index +=1 
+                        print("[" +str(task_index)+ "]",task)  
+
+            if choice ==2:
+                while True:
+        
+                    x = input("Add tasks to do or [0] to exit ")
+                    if x =="0":
+                        break
+                    else:
+                        tasks.append(x)
+                        task_index =0
+                        for task in tasks:
+                            task_index +=1 
+                            print("[" +str(task_index)+ "]",task) 
+                        
+                        
+                    
+                
+
+                
+            if choice ==3:
+                while True:
+                    try:
+                        print("List of all tasks: ")
+                        print()
+                        
+                        if tasks == []:
+                            print("The list is empty")
+                            break
+                        else:   
+                            task_index =0
+                            for task in tasks:
+                                task_index +=1 
+                                print("[" +str(task_index)+ "]",task)   
+                            y = int(input("Choose number of tasks to remove or [0] to exit "))
+                            print()
+                            if y >>0:
+                                del tasks[y -1]
+                            if y == 0:
+                                break
+                            if y <<0:
+                                print("Type correct digits, try again")
+                                print()
+                                continue
+                        
+                        
+                    except ValueError:
+                        print("Type digits, try again ")  
+                        print()
+                        continue
+                    except IndexError:
+                        print("Type correct digits")
+                        continue      
+                    
+            if choice ==4:
+                file = open("todolist.txt", "w")
+                for task in tasks:
+                    file.write(task + "\n")
+                file.close()
+                print("List has been saved ")
+                    
+            if choice ==5:
+                print("Application closed")
+                sys.exit()
+            if choice >>5:
+                print("Choose a number from 1 to 5, try again")   
+            
+        except ValueError:
+            print()
+            print("Type digits, Try again")
+while True:
+    try:
+        file = open("todolist.txt", "r") 
+        for line in file.readlines():
+            line = line.replace("\n", "")
+            tasks.append(line)
+            file.close()
+    except FileNotFoundError:
+        main()   
+    main()             
+        
+
+
+
+    
+
+
