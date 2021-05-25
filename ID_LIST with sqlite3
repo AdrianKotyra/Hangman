@@ -1,0 +1,95 @@
+import sqlite3
+
+import sys
+connection = sqlite3.connect("practise.db")
+
+cur = connection.cursor()
+
+
+
+def create_table(connection):
+    try:
+        cur.execute("""CREATE TABLE id(name text, surname text, age integer) """)
+    except:
+        pass    
+
+def insert_id(connection):
+    while True:
+        print("Type [0] to exit")
+        firstname = input("What is your name, please provide your first name: ") 
+        if firstname =="0":
+            break
+        
+        else:
+            secondname = input("What is your second name, please proivide your surname: ")
+            if secondname =="0":
+                break
+            else:
+                age = int(input("What is your age, please provide: ")) 
+                if age ==0:
+                    break
+                else:
+                    cur.execute("""INSERT INTO id VALUES(?, ?, ?)""",(firstname, secondname, age,))
+                    print()
+                    print("ID succesfully added")
+                    connection.commit()
+        
+
+def show_id(connection):
+    cur.execute("""SELECT rowid, name, surname, age from id""")
+    idlist = cur.fetchall()
+    print("List of all ID's")
+    print("-----------------------")
+    for _ in idlist:
+        print(str(_[0]) + ".", _[1], _[2], str(_[3]))
+    print("-----------------------")    
+       
+
+    
+def del_id(connection):
+    while True:
+        show_id(connection)
+        x = input("Choose number of id to delete: or 0 to exit ")
+        if x == "0":
+            break
+        else:
+            cur.execute("""DELETE from id WHERE rowid=?""",(x,))
+            print("ID has been deleted")
+            print()
+            connection.commit()
+
+def main():
+    try:
+        while True:
+            print()
+            print("1.Show all id's")
+            print("2.Add id's")
+            print("3.Remove id's")
+            print("4.Close application")
+            print()
+            y = int(input("Choose task to execute: "))
+            if y ==1:
+                show_id(connection)
+            if y ==2:
+                insert_id(connection) 
+            if y ==3:
+                del_id(connection)    
+            if y ==4:
+                sys.exit() 
+  
+    except ValueError:
+        print("(Type Digits 1-4)")
+        main()
+
+try:
+    while True:
+        main()        
+except ValueError:
+    print("(Type Digits 1-4)")
+    main()
+    
+    
+
+       
+connection.close()
+ 
