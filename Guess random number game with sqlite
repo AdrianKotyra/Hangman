@@ -1,0 +1,194 @@
+import random
+from sqlite3.dbapi2 import Row
+import sys
+import sqlite3
+
+def main():
+    connnection = sqlite3.connect("Scores.db")
+    cur = connnection.cursor()
+
+
+    def Create_table_score(connection):
+        cur = connnection.cursor()
+        cur.execute("""CREATE TABLE scores(name text, score integer)""")
+        connection.commit()
+
+
+
+    def Show_scores(connnection):
+        while True:
+            print("List of scores")
+            print()
+            cur.execute("""SELECT rowid, name, score from scores""")    
+            scores_all = cur.fetchall()
+            for _ in scores_all:
+                print(str(_[0])+"."+str(_[1])+"-"+str(_[2])+"%")
+            print()    
+            choice2 = int(input("Type [0] to exit: "))
+            if choice2 ==0:
+                break  
+        
+
+
+    def delete_scores(connnection):
+        while True:
+            Show_scores(connnection)
+            x = int(input("Choose score to delete or 0 to exit: "))
+            if x ==0:
+                break
+            else:
+                cur.execute("""DELETE FROM scores WHERE rowid=?""",(x,))
+                print("Score has been deleted ")
+                print()
+                connnection.commit()
+                continue
+
+
+
+    def If_bigger_or_smaller_or_win():
+
+        
+        tries =1
+        used_numbers = []
+        x = int(input("Please type limit of digits to pick number from 1 to: "))
+        random_number_choosen = random.randint(1, x)
+        print()
+        print("The number has been choosen")
+        print("__________________________________")
+        Total_of_tries = int(int(random_number_choosen /2)) -  int(int(random_number_choosen/5))
+        print("Total of tries: ", Total_of_tries)
+        print()
+        print(random_number_choosen)
+        while True:    
+            xx = int(input("Please take [" + str(tries) + "] guess of the choosen number: "))
+            print()
+
+            if xx in used_numbers:
+                print("You already used this number, try again")
+                continue   
+
+            if xx > random_number_choosen:
+                used_numbers.append(xx)
+                tries +=1
+                Total_of_tries -=1
+                print("The insterted number is BIGGER than the choosen one, Please carry on")
+                print()
+                print("Total of tries left:", Total_of_tries)
+                print("Used numbers: ", used_numbers)
+                print()
+
+            if xx < random_number_choosen:
+                used_numbers.append(xx)
+                tries +=1
+                Total_of_tries -=1
+                print("The insterted number is SMALLER than the choosen one, Please carry on")
+                print()
+                print("Total of tries left:", Total_of_tries)
+                print("Used numbers: ", used_numbers)
+                print()
+
+            if xx == random_number_choosen:
+                print("Congratulations, you have found the number ! ")
+                score =  ((Total_of_tries - tries +1)  / Total_of_tries) * 100
+                print("Your accuracy is " + str(score) +"%")
+                while True:
+                    question1 = input("Do you want to add your name to the score table? if yes type [Y] or [N] to exit ")
+                    if question1 == "Y" or question1 =="y":
+                        name = input("Insert your name to the table score: ")
+                        cur.execute("""INSERT INTO scores VALUES(?,?)""",(name, score,))
+                        connnection.commit()  
+                        print("Score has beeen added ")
+                    if question1 == "N" or question1 =="n":
+                        print("Application finished")
+                        sys.exit()
+                    if question1 != "Y" and question1 !="N" and question1 !="n"and question1 !="y":
+                        print("Type correct task [Y] or [N]")
+                        continue 
+                    while True:   
+                        question2 = input("Do you want to start the game again? [Y] to start again [N] to exit. ")
+                        if question2 == "N" or question2 =="n":
+                            sys.exit()
+                        if question2 == "Y" or question2 == "y":
+                            main()
+                        if question2 != "Y" and question2 != "y" and question2 != "n" and question2 != "N":
+                            print("Type correct task [Y] or [N]")
+                            continue
+                            
+            if Total_of_tries <=0:
+                print("All chances has beeen used")    
+                print("Game over, try again")
+                break    
+        
+
+
+
+    while True:
+        try:
+            print()
+            print("1.Show scores")
+            print("2.Delete scores")
+            print("3.Start the game")
+            print("4.Exit")
+            print()
+            choice = int(input("Choose task to execute 1-4: "))
+            if choice ==1:
+                Show_scores(connnection)
+            if choice ==2:
+                delete_scores(connnection)
+            if choice ==3:
+                If_bigger_or_smaller_or_win()
+            if choice ==4:
+                print("Application finished")
+                break
+            if choice >=5:
+                print("Type digits from 1 to 4")  
+            if choice <=0:
+                print("Type digits from 1 to 4") 
+
+        except ValueError:
+            print()
+            print("Type digits")
+            pass        
+
+main()
+
+
+
+
+
+
+
+            
+                
+        
+
+
+
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
