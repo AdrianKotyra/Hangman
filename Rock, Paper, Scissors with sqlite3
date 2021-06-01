@@ -1,0 +1,272 @@
+
+
+import random
+import sqlite3
+import sys
+import time
+
+connection = sqlite3.connect("scores_rock_paper_scissors.db")
+cur = connection.cursor()
+
+def Create_table(connection):
+    try:
+        cur.execute("""CREATE TABLE scores(name text, score integer)""")
+        connection.commit()
+    except:
+        pass
+      
+
+
+
+def Show_scores():
+    while True:
+        
+        cur.execute("""SELECT rowid, name, score from scores """)
+        x = cur.fetchall()
+        print("List of all scores")
+        for _ in x:
+            print(str(_[0])+". "+str(_[1])+"("+ str(_[2])+")")
+        print()    
+        question = int(input("Type [0] to back: "))
+        
+        if question ==0:
+            break    
+
+def Del_scores(connection):
+    while True:
+        cur.execute("""SELECT rowid, name, score from scores """)
+        x = cur.fetchall()
+        print("List of all scores")
+        for _ in x:
+            print(str(_[0])+". "+str(_[1])+"("+ str(_[2])+")")
+        print()    
+        x = int(input("Choose number of scores to delete or to exit[0]: "))
+        if x ==0:
+            break
+        else:
+            y = cur.execute("""DELETE FROM scores WHERE rowid=?""",(x,)).rowcount
+            if y ==0:
+                print("The list of scores is empty")
+                break
+            else:
+                print("Score has been deleted")
+                connection.commit()
+            
+     
+
+
+Create_table(connection)
+
+def main():
+    
+
+    def game():
+        count_input_1 =0
+        count_input_2 =0
+        count_input_3 =0
+        
+        player_points =0
+        computer_points =0
+        
+        
+        while True:
+            try:
+                choose_points = int(input("Choose how many points you want to play to 1.[10], 2.[25], 3.[100] or 4.[exit]: "))
+                chosen_points = 0
+                if choose_points !=1 and choose_points !=2 and choose_points !=3 and choose_points !=4:
+                    print("(Type numbers from 1 to 3 to choose maximum points)")
+                    print()
+                    continue
+                if choose_points >4:
+                    print("(Type numbers from 1 to 3 to choose maximum points)")
+                    print()
+                    continue
+                if choose_points ==1:
+                    chosen_points +=10
+                if choose_points ==2: 
+                    chosen_points +=25
+                if choose_points ==3: 
+                    chosen_points +=100 
+                if choose_points ==4:
+                    break       
+                print("Whoever gets",chosen_points,"Points wins the game.")
+            except ValueError:
+                print("Type Digits")
+                continue    
+            while True:
+                if player_points == chosen_points:
+                    print("Congratulations, you have won !")
+                    y = int(input("If you want to start again type[1], Save your score and exit [2], or exit[0]: "))
+                    if y ==2:
+                        player_score = ((player_points - computer_points) / player_points) *100
+                        player_name = input("Type your name into scores table: ")
+                        cur.execute("""INSERT INTO scores VALUES(?,?)""",(player_name, player_score ,))
+                        print("Score has been added ")
+                        connection.commit()
+                        sys.exit() 
+
+                    if y ==1:
+                        main()
+                    if y ==0:
+                        print("Application finished")
+                        sys.exit()  
+                if computer_points == chosen_points:
+                    print("Computer wins !")
+                    y = int(input("If you want to start again type[1] to exit[0]"))
+                    if y ==1:
+                        main()
+                    if y ==0:
+                        print("Application finished")
+                        sys.exit()     
+                
+                print()
+
+
+                number_player = int(input("Choose number [1]Rock, [2]Paper, [3]Scissors or [0]Exit: "))
+                print()
+            
+                #Computer_AI_def_adding_points
+                if number_player ==1:
+                    count_input_1 +=1
+                    print(count_input_1)
+                    
+
+                if number_player ==2:
+                    count_input_2 +=1 
+                    print(count_input_2)
+                    
+
+                if number_player ==3:
+                    count_input_3 +=1
+                    print(count_input_3)
+                    
+
+               
+                #Computer_ai_3row_choice 
+                number_comp = random.randint(1,3) 
+                if count_input_1 ==3:
+                    number_comp =2
+                    if count_input_1 !=3:
+                        number_comp = random.randint(1,3) 
+
+
+                if count_input_2 ==3:
+                    number_comp =3 
+                    if count_input_2 !=3:
+                        number_comp = random.randint(1,3)    
+
+
+                if count_input_3 == 3:
+                    number_comp =1 
+                    if count_input_3 != 3:
+                        number_comp = random.randint(1,3)           
+
+
+                #Points_AI
+                if number_player ==0:
+                    break
+                if number_player ==1 and number_comp == 1:
+                    print()
+                    print("(Draw)") 
+                if number_player ==1 and number_comp == 2:
+                    computer_points +=1 
+                    print()
+                    print("(Computer wins)")
+                if number_player ==1 and number_comp == 3: 
+                    player_points +=1 
+                    print()
+                    print("(Player wins)")  
+                if number_player ==2 and number_comp == 1:
+                    player_points +=1 
+                    print() 
+                    print("(Player wins)")
+                if number_player ==2 and number_comp == 2: 
+                    print()
+                    print("(Draw)")
+                if number_player ==2 and number_comp == 3:  
+                    computer_points +=1 
+                    print()
+                    print("(Computer wins)")
+                if number_player ==3 and number_comp == 1:  
+                    computer_points +=1
+                    print()
+                    print("(Computer wins)")
+                if number_player ==3 and number_comp == 2: 
+                    player_points +=1 
+                    print()
+                    print("(Player wins)")
+                if number_player ==3 and number_comp == 3:  
+                    print("(Draw)")
+                            
+                #interface_game
+                if number_player ==1:
+
+                    print()
+                    print("Your points", player_points)
+                    print("You choose: ")
+                    print("[Rock]")
+                    print("------------------------------")
+                if number_player ==2:
+                    print()
+                    print("Your points", player_points)
+                    print("You choose: ")
+                    print("[Paper]")
+                    print("------------------------------")
+                if number_player ==3:
+                    print()
+                    print("Your points", player_points)
+                    print("You choose: ")
+                    print("[Scissors]")
+                    print("------------------------------")
+                
+                if number_comp ==1:
+                    print()
+                    print("Computers points", computer_points)
+                    print("Computer chooses: ")
+                    print("[Rock]")
+                    print("------------------------------")
+                if number_comp ==2:
+                    print()
+                    print("Computers points", computer_points)
+                    print("Computer chooses: ")
+                    print("[Paper]")  
+                    print("------------------------------")
+                if number_comp ==3:
+                    print()
+                    print("Computers points", computer_points)
+                    print("Computer chooses: ")
+                    print("[Scissors]") 
+                    print("------------------------------")
+                
+
+    while True:
+        try:
+            print()
+            print("1.Start game")
+            print("2.Show scores")
+            print("3.Delete scores")
+            print("4.Exit")
+            print()
+            choice = int(input("Choose task to execute from 1 to 4: "))
+            print()
+            if choice ==1:
+                game()
+            if choice ==2:
+                Show_scores()  
+            if choice ==3:
+                Del_scores(connection)    
+            if choice ==4:
+                print("Application finished")
+                sys.exit()
+
+        except ValueError:
+            pass    
+main()            
+
+
+
+
+
+
+
+
