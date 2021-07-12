@@ -1,0 +1,92 @@
+
+def main():
+    import sys
+
+    def question_try_again():
+        question2 = input("Would you like to try again?")
+        if question2 =="Yes" or question2 =="Y" or question2 =="y" or question2 =="yes":
+            main()
+        if question2 =="No" or question2 == "n" or question2 == "N" or question2 == "no":
+            print("Application finished")
+            sys.exit(1)      
+
+
+    print("")
+    print("1. Count letter in the word")
+    print("2. Count word in the sentences")
+    print("3. Count letter in the sentences")
+    print("_________________________________")
+    while True:
+        try:
+            choice = int(input("choose task to execute: "))
+            if choice ==1:
+                word = input("Type word: ")
+                letter = input("Type letter: ")
+                if letter in word:
+                    print("Letter found in the word!")
+                    
+                    while True:
+                        question = input("Check numbers of letters?: [Y] or [N] ")
+                        if question =="Yes" or question =="Y" or question =="y" or question =="yes":
+                            print("There is", int(word.count(letter)),"(",letter,")","letter in the word",word)
+                            question_try_again()
+                        if question =="No" or question == "n" or question == "N" or question == "no":
+                            print("Application finished")
+                            break
+                        if question != "Yes" or question !="y" or question !="Y" or question !="yes" or question !="no"  or question !="No" or question !="n" or question !="N":
+                            print("Instert [yes] or [no]") 
+            if choice ==2:
+                sentence = input("Type your sentence: ")
+                x = sentence.split(" ")
+                word2 = input("Type your word: ")
+                if word2 in x:
+                    print("the word has been found in the sentence!")
+                    while True:
+                        question = input("Check numbers of letters?: [Y] or [N] ")
+                        if question =="Yes" or question =="Y" or question =="y" or question =="yes":
+                            print(x.count(word2))
+                            print("There is", int(x.count(word2)),"(",word2,")","word in the sentence",sentence)
+                            question_try_again()
+                        if question =="No" or question == "n" or question == "N" or question == "no":
+                            print("Application finished")
+                            break    
+                        if question != "Yes" or question !="y" or question !="Y" or question !="yes" or question !="no"  or question !="No" or question !="n" or question !="N":
+                            print("Instert [yes] or [no]") 
+            if choice ==3:
+                sentence = input("Type your sentence: ")
+                letter2 = input("Type your letter: ")
+                if letter2 in sentence:
+                    print("the letter has been found in the sentence!")
+                    while True:
+                        question = input("Check numbers of letters?: [Y] or [N] ")
+                        if question =="Yes" or question =="Y" or question =="y" or question =="yes":
+                            print(sentence.count(letter2))
+                            print("There is", int(sentence.count(letter2)),"(",letter2,")","letter in the sentence",sentence)
+                            question_try_again()
+                        if question =="No" or question == "n" or question == "N" or question == "no":
+                            print("Application finished")
+                            break    
+                        if question != "Yes" or question !="y" or question !="Y" or question !="yes" or question !="no"  or question !="No" or question !="n" or question !="N":
+                            print("Instert [yes] or [no]") 
+
+            if choice != 1 or choice != 2 or choice !=3:
+                print("")
+                print("1. Count letter in the word")
+                print("2. Count word in the sentences")
+                print("3. Count letter in the sentences")
+                print("_________________________________")
+                print("Instert 1-3 to execute task")
+        except ValueError:
+                print("")
+                print("1. Count letter in the word")
+                print("2. Count word in the sentences")
+                print("3. Count letter in the sentences")
+                print("_________________________________")
+                print("Instert 1-3 to execute task")
+                                
+
+
+main()
+
+
+
