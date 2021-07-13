@@ -1,6 +1,69 @@
 
 def main():
     import sys
+    import sqlite3
+
+    connection = sqlite3.connect("letters.db")
+    cur = connection.cursor()
+    def menu_execute_tasks():
+        print("")
+        print("1. Count letter in the word")
+        print("2. Count word in the sentences")
+        print("3. Count letter in the sentences")
+        print("4. Check searched words or letters")
+        print("5. Clear the history of search")
+        print("6. Exit")
+        print("_________________________________")
+    def create_table(connection):
+        try:
+            cur.execute("""CREATE TABLE letters(letter text, word text)""")
+            connection.commit()    
+        except:
+            pass 
+    create_table(connection)       
+    def del_table(connection):
+        while True:
+            choose_word_letters = input("Would you like to clear all your search? [Y] or [N] Exit: ")
+            if choose_word_letters =="Yes" or choose_word_letters == "y" or choose_word_letters =="Y":
+                cur.execute("""DELETE FROM letters""")
+                connection.commit()
+                print("Its been deleted!")
+                break
+            if choose_word_letters == "No" or choose_word_letters == "n" or choose_word_letters == "N" or choose_word_letters == "NO":
+                break    
+            if choose_word_letters != "No" or choose_word_letters != "n" or choose_word_letters != "N" or  choose_word_letters != "NO" or choose_word_letters != "yes" or choose_word_letters != "y" or choose_word_letters != "Y" or choose_word_letters != "Yes":
+                print("Instert [Y] or [N]")
+
+
+    def insert_letters(x, y):
+        cur.execute("""INSERT INTO letters VALUES(?,?)""",(x, y))
+        connection.commit()
+    def insert_letters2(y):
+        cur.execute("""INSERT INTO letters(word) VALUES(?)""",(y,))
+        connection.commit()
+
+    def show_letters_words():
+        while True:
+            try:
+                choice = int(input("Check searched words[1] or letters[2], Exit[3]"))
+                if choice ==1:
+                    cur.execute("""SELECT rowid, letter from letters""") 
+                    show_letters = cur.fetchall() 
+                    print(show_letters)
+                if choice ==2:
+                    cur.execute("""SELECT rowid, word from letters""") 
+                    show_words = cur.fetchall() 
+                    for _ in show_words:
+                        print(_) 
+                if choice !=1 or choice !=2 or choice !=3:
+                    print("Insert words[1] or letters[2]")  
+                if choice ==3:
+                    menu_execute_tasks()
+                    break    
+            except ValueError:
+                print("Instrt words[1] or letters[2]")           
+
+
 
     def question_try_again():
         question2 = input("Would you like to try again?")
@@ -8,20 +71,18 @@ def main():
             main()
         if question2 =="No" or question2 == "n" or question2 == "N" or question2 == "no":
             print("Application finished")
-            sys.exit(1)      
+            sys.exit(1) 
 
 
-    print("")
-    print("1. Count letter in the word")
-    print("2. Count word in the sentences")
-    print("3. Count letter in the sentences")
-    print("_________________________________")
+
+    menu_execute_tasks()
     while True:
         try:
             choice = int(input("choose task to execute: "))
             if choice ==1:
                 word = input("Type word: ")
                 letter = input("Type letter: ")
+                insert_letters(word, letter)
                 if letter in word:
                     print("Letter found in the word!")
                     
@@ -38,6 +99,7 @@ def main():
                 sentence = input("Type your sentence: ")
                 x = sentence.split(" ")
                 word2 = input("Type your word: ")
+                insert_letters(word2, letter)
                 if word2 in x:
                     print("the word has been found in the sentence!")
                     while True:
@@ -54,6 +116,7 @@ def main():
             if choice ==3:
                 sentence = input("Type your sentence: ")
                 letter2 = input("Type your letter: ")
+                insert_letters2(letter2)
                 if letter2 in sentence:
                     print("the letter has been found in the sentence!")
                     while True:
@@ -69,23 +132,27 @@ def main():
                             print("Instert [yes] or [no]") 
 
             if choice != 1 or choice != 2 or choice !=3:
-                print("")
-                print("1. Count letter in the word")
-                print("2. Count word in the sentences")
-                print("3. Count letter in the sentences")
-                print("_________________________________")
-                print("Instert 1-3 to execute task")
+                menu_execute_tasks()
+            if choice ==4:
+                show_letters_words() 
+            if choice ==5:
+                del_table(connection)
+
+            if choice ==6:
+                print("Application finished")
+                sys.exit(1)     
         except ValueError:
-                print("")
-                print("1. Count letter in the word")
-                print("2. Count word in the sentences")
-                print("3. Count letter in the sentences")
-                print("_________________________________")
-                print("Instert 1-3 to execute task")
+                menu_execute_tasks()
+                        
                                 
 
 
 main()
+
+
+
+
+
 
 
 
