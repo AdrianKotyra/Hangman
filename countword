@@ -31,7 +31,6 @@ def main():
                             print("There is", int(word.count(letter)),"(",letter,")","letter in the word",word)
                             question_try_again()
                         if question =="No" or question == "n" or question == "N" or question == "no":
-                            print("Application finished")
                             break
                         if question != "Yes" or question !="y" or question !="Y" or question !="yes" or question !="no"  or question !="No" or question !="n" or question !="N":
                             print("Instert [yes] or [no]") 
