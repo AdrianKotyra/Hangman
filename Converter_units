@@ -1,0 +1,417 @@
+
+
+
+import sys
+sys.float_info.max
+
+mass_names_list = ["gigatonne", "megatonne", "tonne", "kilogram", "gram", "milligram", "microgram", "nanogram", "microgram", "pound", "ounce"]
+time_names = ["Second", "Minute", "Hour", "Week", "Month", "Year", "Decade", "Century", "Millennium"]
+Temp_names_list = ["Celsius", "Fahrenheit", "Kelvin", "Rankine", "Reaumur"]
+dist_names_list = ["Kilometer", "Hectometer", "Dekameter", "Meter", "Decimeter", "Centimeter", "Milimeter", "Micrometer"]
+
+
+def mass_names_word1(x):
+    mass_names_list_index =0
+    for _ in mass_names_list:
+        mass_names_list_index +=1
+    y = mass_names_list[x -1]   
+    return y
+        
+def mass_names_word2(x):
+    mass_names_list_index =0
+    for _ in mass_names_list:
+        mass_names_list_index +=1
+    y = mass_names_list[x -1]   
+    return y  
+
+def time_names_word1(x):
+    time_names_index =0
+    for _ in time_names:
+        time_names_index +=1
+    xs = time_names[x -1]   
+    return xs
+
+def time_names_word2(x):
+    time_names_index =0
+    for _ in time_names:
+        time_names_index +=1
+    ys = time_names[x -1]   
+    return ys
+
+def temp_names_word1(x):
+    Temp_names_list_index =0
+    for _ in Temp_names_list:
+        Temp_names_list_index +=1
+    aa = Temp_names_list[x -1]   
+    return aa
+
+def temp_names_word2(x):
+    temp_names_list_index =0
+    for _ in Temp_names_list:
+        temp_names_list_index +=1
+    ab = Temp_names_list[x -1]   
+    return ab
+
+
+def dist_names_word1(x):
+    dist_names_list_index =0
+    for _ in dist_names_list:
+        dist_names_list_index +=1
+    ac = dist_names_list[x -1]   
+    return ac  
+
+def dist_names_word1(x):
+    dist_names_list_index =0
+    for _ in dist_names_list:
+        dist_names_list_index +=1
+    ad = dist_names_list[x -1]   
+    return ad  
+    
+        
+      
+    
+    
+
+def mass_names():
+    print("(List of mass units)")
+    print("-------------------------")
+    mass_names_list_index =0
+    for _ in mass_names_list:
+        mass_names_list_index +=1
+        print("[" + str(mass_names_list_index) + "]" + _ )
+    print("-------------------------")
+    print("[0]Exit") 
+     
+
+def Time_names():
+    print("(List of time units)")
+    print("-------------------------")
+    time_names_index =0
+    for _ in time_names:
+        time_names_index +=1
+        print("[" + str(time_names_index) + "]" + _ )
+    print("-------------------------")
+    print("[0]Exit")
+
+def Temp_names():
+    print("(List of temperature units)")
+    print("-------------------------")
+    Temp_names_list_index =0
+    for _ in Temp_names_list:
+        Temp_names_list_index +=1
+        print("[" + str(Temp_names_list_index) + "]" + _ )
+    print("-------------------------")
+    print("[0]Exit")  
+
+def distance_unit_names():
+    
+    print("(List of temperature units)")
+    print("-------------------------")
+    dist_names_list_index =0
+    for _ in dist_names_list:
+        dist_names_list_index +=1
+        print("[" + str(dist_names_list_index) + "]" + _ )
+    print("-------------------------")
+    print("[0]Exit")    
+
+
+
+
+
+def mass_units_to_be_converted(x):
+
+    mass_unit_to_be_converted =0
+    if x ==1:
+        mass_unit_to_be_converted = 1000000000000000
+    if x ==2:
+        mass_unit_to_be_converted = 1000000000000
+    if x ==3:
+        mass_unit_to_be_converted = 1000000   
+    if x ==4:
+        mass_unit_to_be_converted = 1000  
+    if x ==5:
+        mass_unit_to_be_converted = 1       
+    if x ==6:
+        mass_unit_to_be_converted = 0.001 
+    if x ==7:
+        mass_unit_to_be_converted = 0.000001
+    if x ==8:
+        mass_unit_to_be_converted = 0.000000001  
+    if x ==9:
+        mass_unit_to_be_converted = 0.000000000001  
+    if x ==10:
+        mass_unit_to_be_converted = 453.59  
+    if x ==11:
+        mass_unit_to_be_converted = 28.35
+    
+    return mass_unit_to_be_converted       
+
+
+
+def time_unit_to_be_converted(x):
+    time_unit_to_be_converted =0
+    
+    if x ==1:
+        time_unit_to_be_converted = 1
+    if x ==2:
+        time_unit_to_be_converted = 60
+    if x ==3:
+        time_unit_to_be_converted = 3600  
+    if x ==4:
+        time_unit_to_be_converted = 86400
+    if x ==5:
+        time_unit_to_be_converted = 604800      
+    if x ==6:
+        time_unit_to_be_converted = 2629800
+    if x ==7:
+        time_unit_to_be_converted = 31557600
+    if x ==8:
+        time_unit_to_be_converted = 3155760000
+    if x ==9:
+        time_unit_to_be_converted = 31557600000
+      
+    return time_unit_to_be_converted    
+
+
+def temp_units_to_be_converted(x):
+
+    temp_unit_to_be_converted =0
+    if x ==1:
+        temp_unit_to_be_converted = 1
+    if x ==2:
+        temp_unit_to_be_converted = 33.8
+    if x ==3:
+        temp_unit_to_be_converted = 274.15 
+    if x ==4:
+        temp_unit_to_be_converted = 493.47
+    if x ==5:
+        temp_unit_to_be_converted = 0.8  
+
+    return temp_unit_to_be_converted     
+
+
+
+def distance_units_to_be_converted(x):
+    distance_unit_to_be_converted =0
+    if x ==1:
+        distance_unit_to_be_converted = 1000
+    if x ==2:
+        distance_unit_to_be_converted = 100
+    if x ==3:
+        distance_unit_to_be_converted = 10
+    if x ==4:
+        distance_unit_to_be_converted = 1
+    if x ==5:
+        distance_unit_to_be_converted = 0.01
+    if x ==6:
+        distance_unit_to_be_converted = 0.001
+    if x ==7:
+        distance_unit_to_be_converted = 0.0001
+    if x ==8:
+        distance_unit_to_be_converted = 0.000001
+    return distance_unit_to_be_converted    
+
+
+
+
+    
+
+def convert_mass_units():
+    mass_unit_to_be_converted = mass_units_to_be_converted(convert_mass_unit)
+    mass_unit_to_convert_to_value = mass_units_to_be_converted(choose_unit_to_convert_to)
+    calculation = (mass_unit_to_be_converted* how_many1) / mass_unit_to_convert_to_value
+    return calculation
+    
+def convert_time_units():
+    time_units_to_be_converted = time_unit_to_be_converted(convert_time_unit)
+    time_units_to_convert_to_value = time_unit_to_be_converted(choose_unit_to_convert_to)
+    calculation = (time_units_to_be_converted* how_many2) / time_units_to_convert_to_value 
+    return calculation
+
+def convert_temp_units():
+    temp_units_to_be_converted_cal = temp_units_to_be_converted(convert_temp_unit)
+    temp_units_to_be_converted_cal_to = temp_units_to_be_converted(choose_unit_to_convert_to) 
+    calculation = (temp_units_to_be_converted_cal_to*how_many3) / temp_units_to_be_converted_cal
+    return calculation
+
+def convert_distance_units():
+    distance_unit_to_be_converted = distance_units_to_be_converted(convert_distance_unit)
+    distance_unit_to_be_converted_to = distance_units_to_be_converted(choose_unit_to_convert_to)
+    calculation = (distance_unit_to_be_converted*how_many4) / distance_unit_to_be_converted_to
+    return calculation
+
+
+      
+    
+
+while True:
+    print()
+    print("1.Mass units")
+    print("2.Time")
+    print("3.Temperature")
+    print("4.Distance")
+    print("5.Exit")
+    print()
+    try:
+        choose_unit = int(input("Choose kind of unit to start converting: "))
+        if choose_unit ==1:
+            while True:
+                mass_names()
+                convert_mass_unit = int(input("Choose unit to start converting: "))  
+                if convert_mass_unit ==0:
+                    break
+
+                while True:
+                    try:
+                        y = mass_names_word1(convert_mass_unit)
+                        how_many1 = float(input("How many of choosen " + y + "s you want to convert: "))
+                            
+                        mass_units_to_be_converted(convert_mass_unit)
+                        choose_unit_to_convert_to = int(input("Choose unit to convert to: "))
+                        mass_names_word2(choose_unit_to_convert_to)
+                        y2 = mass_names_word2(choose_unit_to_convert_to)
+                        if choose_unit_to_convert_to ==0:
+                            break
+                        mass_units_to_be_converted(choose_unit_to_convert_to)
+                        convert_mass_units()
+                        xs = convert_mass_units()
+                        print(str(how_many1) +" " + y +" is equal " + str(xs) +" "+y2)
+                        break
+                    except IndexError:
+                        print("(Choose correct index)")
+                        break
+                        
+
+            
+            
+        if choose_unit ==2:
+            while True:
+                try:
+                    Time_names()
+                    convert_time_unit = int(input("Choose unit to start converting: "))
+                    if convert_time_unit <=0:
+                        break
+                    while True:
+                        try:
+                            xs = time_names_word1(convert_time_unit)
+                            time_unit_to_be_converted(convert_time_unit)
+                            how_many2 = float(input("How many of choosen " + xs + "s you want to convert: "))
+                            if how_many2 ==0:
+                                break
+                            
+                            choose_unit_to_convert_to = int(input("Choose unit to convert to: "))
+                            time_names_word2(convert_time_unit)
+                            xs2 = time_names_word2(choose_unit_to_convert_to)
+                            if choose_unit_to_convert_to ==0:
+                                break
+                            time_unit_to_be_converted(choose_unit_to_convert_to)
+                            convert_time_units()
+                            cc = convert_time_units()
+                            print(str(how_many2) +" " + xs +" is equal " + str(cc) +" "+xs2)
+                            break
+                        except IndexError:
+                            print("(Choose correct index)")
+                            break
+                except ValueError:
+                    print("(Type digits)")
+                    print()
+        if choose_unit ==3:
+            while True:
+                try:
+                    Temp_names()
+                    convert_temp_unit = int(input("Choose unit to start converting: "))
+                    if convert_temp_unit <=0:
+                        break
+                    while True:
+                        try:
+                            n = temp_names_word1(convert_temp_unit)
+                            how_many3 = float(input("How many of choosen " + n + "s you want to convert: "))
+                            if how_many3 ==0:
+                                break
+                            temp_units_to_be_converted(convert_temp_unit)
+                            choose_unit_to_convert_to = int(input("Choose unit to convert to: "))
+                            n2= temp_names_word2(choose_unit_to_convert_to)
+                            if choose_unit_to_convert_to ==0:
+                                break
+                            temp_units_to_be_converted(choose_unit_to_convert_to)
+                            convert_temp_units()
+                            ad = convert_temp_units()
+                            print(str(how_many3) +" " + n +" is equal " + str(ad) +" "+n2)
+                            break
+                        except IndexError:
+                            print("(Choose correct index)")
+                            break    
+                except ValueError:
+                    print("(Type digits)")
+                    print()
+                        
+        if choose_unit ==4:
+            while True:
+                try:
+                    distance_unit_names() 
+                    convert_distance_unit = int(input("Choose unit to start converting: "))
+                    if convert_distance_unit <=0:
+                        break
+                    while True:
+                        try:
+                            o = dist_names_word1(convert_distance_unit)
+                            how_many4 = float(input("How many of choosen units you want to convert: "))
+                            distance_units_to_be_converted(convert_distance_unit)
+                            if how_many4 ==0:
+                                break
+                            choose_unit_to_convert_to = int(input("Choose unit to convert to: "))
+                            o2 = dist_names_word1(choose_unit_to_convert_to)
+                            if choose_unit_to_convert_to == 0:
+                                break
+                            distance_units_to_be_converted(choose_unit_to_convert_to)
+                            convert_distance_units()
+                            f = convert_distance_units()
+                            print(str(how_many4) +" " + o +" is equal " + str(f) +" "+o2)
+                            break
+                        except IndexError:
+                            print("(Choose correct index)")
+                            break
+                        except ValueError:
+                            print("Type digits")
+                except ValueError:
+                    print("(Type digits)")
+                    print()
+        if choose_unit ==5:
+            print("Application finished")
+            sys.exit()
+    except ValueError:
+        print("(Type digits)")        
+        
+        
+
+
+
+
+
+
+
+         
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+           
+
