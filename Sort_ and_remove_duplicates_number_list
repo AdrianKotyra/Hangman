@@ -1,0 +1,47 @@
+import sys
+Values_list = []
+def Creating_list():
+    while True:
+        try:
+            Values = int(input("Add number to your list or [X] to finish: "))
+            if isinstance(Values, int) == True:
+                Values_list.append(Values)
+            if isinstance(Values, str) == True:
+                break
+        except ValueError:
+            break
+def menu():
+    print("Here is your list of numbers")    
+    print(Values_list)    
+    print()
+    print("1. Add numbers to the list")
+    print("2. Sort the list from the least to the greatest value")
+    print("3. Remove duplicated numbers")
+    print("4. Clear the list")
+    print("5. Exit app")
+    print("--------------------")
+menu()    
+while True:
+    menu()
+    choice = int(input("Choose task to execute: "))
+    if choice ==1:
+        Creating_list()
+
+    if choice ==2:
+        Values_list = sorted(Values_list)
+        print(Values_list)
+        
+    if choice ==3:
+        Values_list= list(dict.fromkeys(Values_list))
+        print(Values_list) 
+           
+    if choice ==4:
+        Values_list.clear()
+        print("The list has been cleared! ")
+
+    if choice ==5:
+        print("Application finished")
+        sys.exit()       
+         
+
+
