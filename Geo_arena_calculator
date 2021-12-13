@@ -1,0 +1,144 @@
+import time
+import sys
+choose_geo = 0
+choice = range(0, 4)
+
+
+
+def menu_generator():
+        global choice
+        global choose_geo
+        choose_geo =0
+        while True:
+            try:
+                choice_geo = int(input("-------------------\nplease type a number from 1 to 4: \n(Calculate area of:)\n1.Triangles\n2.Quadrilaterals\n3.Circle\n4.Exit\n-------------------"))
+                if choice_geo ==4:
+                    print("Application finished.")
+                    sys.exit(1)  
+                if choice_geo not in choice:
+                    continue  
+                if choice_geo in choice:
+                    choose_geo += choice_geo
+                    break
+            
+            except ValueError:  
+                print("(Type 1-4 to choose task: )") 
+                print()
+                
+           
+    
+            
+                
+def triangle_area():
+    while True:
+        try:
+            triangle_length = float
+            triangle_height = float
+            triangle_choice = int(input("Please choose [1]length or [2]height [3]back: "))   
+            if triangle_choice ==1:
+                triangle_length = float(input("Please provide length in cm: "))
+                triangle_height = float(input("Please provide height in cm: "))
+                print("Your triangle is "+str(triangle_length*triangle_height/2)+" square cm")
+                print("-------------------")
+                break 
+                           
+            if triangle_choice ==2:    
+                triangle_height = float(input("Please provide height in cm: "))
+                triangle_length = float(input("Please provide length in cm: "))
+                print("Your triangle is "+str(triangle_length*triangle_height/2)+" square cm")
+                print("-------------------")
+                break   
+            if triangle_choice ==3:   
+                break 
+        except ValueError:
+            print("(Use digit): ")    
+
+def Quadrilaterals():
+    while True:
+        try:
+            Quadrilaterals_geo = int(input("1.Square 2.Rhombus 3.Rectangle 4.back:  "))
+            if Quadrilaterals_geo ==1:
+                Quadrilaterals_square_length = float(input("Please provide side length in cm: "))   
+                print("Your Square is "+str(Quadrilaterals_square_length**2)+" square cm")
+                print("-------------------")
+                break 
+
+            if Quadrilaterals_geo ==5:   
+                break 
+            if Quadrilaterals_geo ==2:
+                rhomb_geo = int(input("Please choose [1]diagonal [2]height [3]Side [4]back: "))   
+                if rhomb_geo ==1:
+                    rhomb_geo_diagonal1 = float(input("Please provide 1 diagonal length in cm: "))
+                    rhomb_geo_diagonal2 = float(input("Please provide 2 diagonal length in cm: "))
+                    print("Your Rhomb is "+str(rhomb_geo_diagonal1*rhomb_geo_diagonal2/2)+" square cm")
+                    print("-------------------")
+                    break 
+                if rhomb_geo ==2:
+                    rhomb_geo_height = float(input("Please provide height length in cm: "))  
+                    rhomb_geo_side = float(input("Please provide side lenght in cm: "))
+                    print("Your Rhomb is "+str(rhomb_geo_height*rhomb_geo_side)+" square cm")
+                    print("-------------------")
+                    break
+                                
+                if rhomb_geo ==3:    
+                    rhomb_geo_side = float(input("Please provide side lenght in cm: "))
+                    rhomb_geo_height = float(input("Please provide height length in cm: "))  
+                    print("Your Rhomb is "+str(rhomb_geo_side*rhomb_geo_side)+" square cm")
+                    print("-------------------")
+                    break
+                if rhomb_geo ==4:   
+                    break 
+            if Quadrilaterals_geo ==3: 
+                Quadrilaterals_rectangle_side1 = float(input("Please provide 1 side length in cm: "))   
+                Quadrilaterals_rectangle_side2 = float(input("Please provide 2 side length in cm: ")) 
+                print("Your Rectangle is "+str(Quadrilaterals_rectangle_side1*Quadrilaterals_rectangle_side2)+" square cm")
+                print("-------------------")
+                break 
+  
+        except ValueError:
+            print("(Use digits:) ")  
+
+def circle_area():
+    while True:
+        try:
+            circle_geo_side = float(input("Please provide circle diameter in cm: "))
+            print("Your Circle area is "+str(circle_geo_side*3.14)+" square cm")
+            print("-------------------")
+            break    
+        except ValueError:
+            print("Type digits") 
+        
+           
+            
+print("-------------------\nThis is geoetric area generator\nChoose task to execute")
+while True:
+    menu_generator()
+    if choose_geo ==4:
+        print("Application finished")
+        sys.exit(1)
+    if choose_geo ==1:
+        triangle_area()
+    if choose_geo ==2:
+        Quadrilaterals()
+    if choose_geo ==3:  
+        circle_area() 
+        
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
