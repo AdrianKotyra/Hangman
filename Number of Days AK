@@ -34,82 +34,116 @@ def choose_month_see_days():
     
   
 
-def months_name(a):
+def months_name(user_date_month):
     
     for i in range(1, 13, 1):
         if user_date_month ==i:
-            print("You have choosen",list_of_months[i-1]  )
+            print("You have choosen",list_of_months[i-1]
+        )
             
         
+def main():
+    while True:
 
-while True:
-      
-    try:
-       
-        
-     
-        
         while True:
-            
-            print("-------------------------------------")
-            print("Hello, please enter your date.")
-            print("-------------------------------------")
-            user_date_year = int(input("please enter a year: "))
-        
-        
-            sum_month = whole_year_sum ()
-            sum_days_passed = 0
-            if user_date_year%4==0 and (user_date_year % 100 != 0 or user_date_year % 400 == 0):
-                print("(This is a leap year)")
-                sum_month +=1
-                whole_year[1]=29
-                
-                
-                
             try:
-                user_date_month = int(input('\n[1]January\n[2]February \n[3]March \n[4]April \n[5]May\n[6]June\n[7]July\n[8]August\n[9]September\n[10]October\n[11]November\n[12]December\nplease enter a month[1-12]:' ))
-                months_name(user_date_month)
-                if user_date_month<=0:
-                    print("Type correct number")
-                else:
-                    
             
-                    for i in range (user_date_month):
-                        sum_days_passed += whole_year[i]
-                    user_date_day = int(input("please enter a day: "))
-                    if user_date_day<=0 or user_date_day >31 or user_date_day>whole_year[user_date_month-1]: 
-                        print("Type correct number")
-                        break
-                    else:
-                        sum_days_passed_left = sum_month - sum_days_passed + whole_year[i] - user_date_day
-                        days_passed = sum_month - (sum_month - sum_days_passed + whole_year[i] - user_date_day)
+                print("-------------------------------------")
+                print("Hello, please enter your date.")
+                print("-------------------------------------")
+                user_date_year = int(input("please enter a year: "))
+            
+            
+                sum_month = whole_year_sum ()
+                sum_days_passed = 0
+                if user_date_year%4==0 and (user_date_year % 100 != 0 or user_date_year % 400 == 0):
+                    print("(THIS IS A LEAP YEAR)")
+                    sum_month +=1
+                    whole_year[1]=29
+        
+            
+                while True:
+                    try:
+                        user_date_month = int(input('\n[1]January\n[2]February \n[3]March \n[4]April \n[5]May\n[6]June\n[7]July\n[8]August\n[9]September\n[10]October\n[11]November\n[12]December'+ " \nYou have choosen year: (" + str(user_date_year) +")" + "\nplease enter a month[1-12]: " ))
+                        months_name(user_date_month)
                         
-                    
-                        print(int(sum_days_passed_left), " [days left]")
-                        print(int(days_passed), "[days passed]")
+                        
                         while True:
-                            again = input('Want to start again? please enter "yes" or "no" to finish: ')
-                            if again =="no":
-                                sys.exit()
-                            if again =="yes":
-                                break
-                            else:
-                                print('Enter "yes" or "no"')
-    
+                            try:
+
+                                if user_date_month<=0:
+                                    print("Type correct number")
+                                    break
+                                    
+                                if user_date_month>=13:
+                                    print("Type correct number") 
+                                    break
+                                    
+                                else:
+                                
+                                    for i in range (user_date_month):
+                                        sum_days_passed += whole_year[i]
+                                    while True:  
+                                        try:  
+                                            user_date_day = int(input("please enter a day: "))
+                                            if user_date_day<=0 or user_date_day >31 or user_date_day>whole_year[user_date_month-1]: 
+                                                print("Type correct number")
+                                                break
+                                                
+                                            else:
+                                                sum_days_passed_left = sum_month - sum_days_passed + whole_year[i] - user_date_day
+                                                days_passed = sum_month - (sum_month - sum_days_passed + whole_year[i] - user_date_day)
+                                                
+                                            
+                                                print(int(sum_days_passed_left), " [days left]")
+                                                print(int(days_passed), "[days passed]")
+                                                while True:
+                                                    again = input('Want to start again? please enter "yes" or "no" to finish: ')
+                                                    if again =="no":
+                                                        print("Application finished")
+                                                        sys.exit()
+                                                    if again =="yes":
+                                                        main()    
+                                                        
+                                                    else:
+                                         
+                                                       print('Enter "yes" or "no"')
+                                                        
+                                                    return user_date_month
+                                                       
+                                        except ValueError:
+                                            print("type correct number")
+                                            pass
+                        
+                                        except IndexError:
+                                            pass  
+                                            
+                                          
+                             
+                                   
+                            except ValueError:
+                                pass
+                            
+                            except IndexError:
+                                pass  
+                    
+                    except IndexError:
+                        pass  
+                    except ValueError:
+                        print("Type correct numbers again!")
+                        pass
+                        
+            
+                    except IndexError:
+                        pass  
+            except IndexError:
+                pass
+                
             except ValueError:
                 pass
-                print("Type correct numbers again!")
-    
-            except IndexError:
-                pass  
-    except IndexError:
-        pass
-          
-    except ValueError:
-        pass
-        print("Type correct numbers")
-    
-    
+                print("Type correct numbers")
+
+main()    
     
 
     
