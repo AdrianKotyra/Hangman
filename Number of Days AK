@@ -134,8 +134,7 @@ def main():
                         pass
                         
             
-                    except IndexError:
-                        pass  
+                   
             except IndexError:
                 pass
                 
