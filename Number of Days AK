@@ -1,8 +1,3 @@
-
-from logging import exception
-import sys
-
-
 whole_year = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 list_of_months = ["January", "February","March","April", "May", "June","July", "August", "September", "October", "November", "December"  ]  
 
@@ -19,14 +14,14 @@ list_of_months = ["January", "February","March","April", "May", "June","July", "
 # November = 30 
 # December = 31 
 
-
+#------------------------------------------------------------------------#  
 def whole_year_sum ():
     whole_year_sum = 0
     for i in whole_year:
         whole_year_sum += i
     return whole_year_sum
 
-
+#------------------------------------------------------------------------#  
 def leap_year_condition (user_date_year, sum_month):
     if user_date_year %4==0 and (user_date_year % 100 != 0 or user_date_year % 400 == 0):
         print("(THIS IS A LEAP YEAR)")
@@ -35,23 +30,22 @@ def leap_year_condition (user_date_year, sum_month):
     return sum_month, whole_year
     
         
-    
+#------------------------------------------------------------------------#      
         
 def choose_month_see_days():
     user_month = int(input("Please enter a month from 1-12: "))
     print(whole_year[user_month-1])
     
   
-
+#------------------------------------------------------------------------#  
 def months_name(user_date_month):
     
     for i in range(1, 13, 1):
         if user_date_month ==i:
             print("You have choosen",list_of_months[i-1])
-        
-            
+ #------------------------------------------------------------------------#         
+           
 
-  
 def main():
    
 
@@ -61,18 +55,16 @@ def main():
             print("-------------------------------------")
             print("Hello, please enter your date.")
             print("-------------------------------------")
+            
             user_date_year = int(input('please enter a year: '))
-         
-        
+            
+            whole_year[1]=28
             sum_month = whole_year_sum ()
             sum_days_passed = 0
+            
             leap_year_condition (user_date_year, sum_month)
             sum_month = whole_year_sum ()
-            
-                
-             
-    
-        
+
             while True:
                 try:
                     user_date_month = int(input('\n[1]January\n[2]February \n[3]March \n[4]April \n[5]May\n[6]June\n[7]July\n[8]August\n[9]September\n[10]October\n[11]November\n[12]December'+ " \nYou have choosen year: (" + str(user_date_year) +")" + "\nplease enter a month[1-12]: " ))
@@ -81,17 +73,13 @@ def main():
                     
                     while True:
                         try:
-
                             if user_date_month<=0:
                                 print("Type correct number")
-                                break
-                                
+                                break  
                             if user_date_month>=13:
                                 print("Type correct number") 
                                 break
-                                
                             else:
-                            
                                 for i in range (user_date_month):
                                     sum_days_passed += whole_year[i]
                                 while True:  
@@ -100,7 +88,6 @@ def main():
                                         if user_date_day<=0 or user_date_day >31 or user_date_day>whole_year[user_date_month-1]: 
                                             print("Type correct number")
                                             break
-                                         
                                         else:
                                             sum_days_passed_left = sum_month - sum_days_passed + whole_year[i] - user_date_day
                                             days_passed = sum_month - (sum_month - sum_days_passed + whole_year[i] - user_date_day)
@@ -108,57 +95,37 @@ def main():
                                         
                                             print(int(sum_days_passed_left), " [days left]")
                                             print(int(days_passed), "[days passed]")
+                                            
                                             while True:
                                                 again = input('Want to start again? please enter "yes" or "no" to finish: ')
                                                 if again =="no":
                                                     print("Application finished")
-                                                    sys.exit()
+                                                    quit()
                                                 if again =="yes":
-                                                    main()    
-                                                    
+                                                    main()      
                                                 else:
-                                        
                                                     print('Enter "yes" or "no"')
-                                                    
-                                                return user_date_month
-                                                    
+                                                    continue
+                                                return user_date_month              
                                     except ValueError:
                                         print("type correct number")
                                         pass
-                    
                                     except IndexError:
-                                        pass  
-                                        
-                                        
-                            
-                                
+                                        pass       
                         except ValueError:
                             pass
-                        
                         except IndexError:
                             pass  
-                
                 except IndexError:
                     pass  
                 except ValueError:
                     print("Type correct numbers again!")
                     pass     
         except IndexError:
-            pass
-            
+            pass   
         except ValueError:
             pass
             print("Type correct numbers")
-       
+#------------------------------------------------------------------------#        
 
-main()    
-    
-
-
-    
-    
-    
-    
-    
-    
-
+main()
