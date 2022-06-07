@@ -63,8 +63,7 @@ def main():
             sum_days_passed = 0
             
             leap_year_condition (user_date_year, sum_month)
-            sum_month = whole_year_sum ()
-
+            
             while True:
                 try:
                     user_date_month = int(input('\n[1]January\n[2]February \n[3]March \n[4]April \n[5]May\n[6]June\n[7]July\n[8]August\n[9]September\n[10]October\n[11]November\n[12]December'+ " \nYou have choosen year: (" + str(user_date_year) +")" + "\nplease enter a month[1-12]: " ))
@@ -80,13 +79,14 @@ def main():
                                 print("Type correct number") 
                                 break
                             else:
+                                sum_days_passed = 0
                                 for i in range (user_date_month):
                                     sum_days_passed += whole_year[i]
                                 while True:  
                                     try:  
                                         user_date_day = int(input("please enter a day: "))
                                         if user_date_day<=0 or user_date_day >31 or user_date_day>whole_year[user_date_month-1]: 
-                                            print("Type correct number")
+                                            print("Type correct number 2222")
                                             break
                                         else:
                                             sum_days_passed_left = sum_month - sum_days_passed + whole_year[i] - user_date_day
@@ -128,4 +128,9 @@ def main():
             print("Type correct numbers")
 #------------------------------------------------------------------------#        
 
-main()
+main()    
+    
+
+
+    
+    
